@@ -5,4 +5,6 @@ import { JobPostingFormComponent } from './job-posting-form/job-posting-form.com
 export const routes: Routes = [
     { path: 'job-posting-list', component: JobPostingListComponent },
     { path: 'job-posting-form', component: JobPostingFormComponent },
+    { path: '', component: JobPostingListComponent },
+    { path: '**', redirectTo: '' }
 ];

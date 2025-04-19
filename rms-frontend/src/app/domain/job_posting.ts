@@ -3,7 +3,7 @@ import { Department } from './department';
 export type IJobPostingOrNull = IJobPosting | null;
 
 export interface IJobPosting {
-  id: number,
+  id?: number,
   title: string,
   description: string,
   department: Department,

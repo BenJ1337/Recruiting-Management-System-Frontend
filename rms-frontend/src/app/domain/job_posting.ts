@@ -12,10 +12,10 @@ export interface IJobPosting {
 }
 
 export enum JobPostingStatus {
-  DRAFT,
-  QA,
-  PUBLISHED,
-  SCREENING_OF_APPLICATIONS,
-  INVITATION_SENT,
-  ARCHIVED
+  DRAFT = "Draft",
+  QA = "QA",
+  PUBLISHED = "Published",
+  SCREENING_OF_APPLICATIONS = "Screening of Applications",
+  INVITATION_SENT = "Invitations sent",
+  ARCHIVED = "Archived"
 }

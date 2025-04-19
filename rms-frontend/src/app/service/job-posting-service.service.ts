@@ -11,6 +11,10 @@ export class JobPostingServiceService {
   private http = inject(HttpClient);
 
   public getJobPostings(): Observable<IJobPosting[]> {
-    return this.http.get<IJobPosting[]>('http://localhost/api/v1/jobpostings');
+    return this.http.get<IJobPosting[]>('/api/v1/jobpostings');
+  }
+
+  public sendJobPosting(jobPosting: IJobPosting): Observable<IJobPosting> {
+    return this.http.put<any>('/api/v1/jobpostings/3', jobPosting);
   }
 }

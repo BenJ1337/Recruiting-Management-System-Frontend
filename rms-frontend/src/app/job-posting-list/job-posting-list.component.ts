@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { JobPostingServiceService } from '../service/job-posting-service.service';
+import { JobPostingServiceService } from '../service/job-posting.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { IJobPosting } from '../domain/job_posting';
+import { IJobPosting } from '../domain/job-posting';
 import { MatSnackBar, MatSnackBarModule, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Observable, map } from 'rxjs';
+import { LocalStorageService } from '../service/local-storage.service';
 
 @Component({
   selector: 'app-job-posting-list',
@@ -15,7 +16,7 @@ import { Observable, map } from 'rxjs';
 export class JobPostingListComponent {
   private jobPostingService = inject(JobPostingServiceService);
   private snackbar = inject(MatSnackBar);
-
+  private localStorage = inject(LocalStorageService);
 
   columnsDisplay: string[] = ['title', 'description'];
   dataSource: MatTableDataSource<IJobPosting> = new MatTableDataSource<IJobPosting>();

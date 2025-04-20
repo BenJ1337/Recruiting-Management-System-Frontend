@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Validators, NonNullableFormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { IJobPosting, JobPostingStatus } from '../domain/job_posting';
+import { IJobPosting, JobPostingStatus } from '../domain/job-posting';
 import { Department } from '../domain';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -9,7 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { requireNotBlank } from '../validators/JobPostingValidator';
-import { JobPostingServiceService } from '../service/job-posting-service.service';
+import { JobPostingServiceService } from '../service/job-posting.service';
+import { LocalStorageService } from '../service/local-storage.service';
+
 @Component({
   selector: 'app-job-posting-form',
   imports: [
@@ -25,7 +27,7 @@ import { JobPostingServiceService } from '../service/job-posting-service.service
 })
 export class JobPostingFormComponent {
   private jobPostingService = inject(JobPostingServiceService);
-
+  private localStorageService = inject(LocalStorageService);
   jobPostingForm: FormGroup;
   departments = Object.values(Department);
   constructor(private _fb: NonNullableFormBuilder) {
@@ -42,7 +44,7 @@ export class JobPostingFormComponent {
   create() {
     const jobPosting: IJobPosting = { ...this.jobPostingForm.value, status: JobPostingStatus.DRAFT };
     console.log(jobPosting);
-    this.jobPostingService.sendJobPosting(jobPosting).subscribe(data => console.log(data));
+    //this.jobPostingService.sendJobPosting(jobPosting).subscribe(data => console.log(data));
   }
 
 

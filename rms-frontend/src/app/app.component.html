@@ -2,8 +2,9 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
         <mat-nav-list>
-            <a mat-list-item routerLink="job-posting-list">Job Postings</a>
-            <a mat-list-item routerLink="job-posting-form">Add Job Posting</a>
+            <ng-container *ngFor="let link of links">
+                <a mat-list-item [routerLink]="link.route">{{link.text}}</a>
+            </ng-container>
         </mat-nav-list>
     </mat-sidenav>
 

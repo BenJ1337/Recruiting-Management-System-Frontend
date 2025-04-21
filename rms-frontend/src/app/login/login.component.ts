@@ -12,6 +12,7 @@ import { User } from '../domain/user';
 import { LoginService } from '../service/login.service';
 import { AccessToken } from '../domain/auth/access-token';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -22,17 +23,17 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    CommonModule],
+    CommonModule, MatSnackBarModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
-  providers: [LoginService, LocalStorageService]
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  private readonly localStorageService: LocalStorageService = inject(LocalStorageService);
   private readonly loginService: LoginService = inject(LoginService);
   private readonly router: Router = inject(Router);
+  private readonly snackbar = inject(MatSnackBar);
   loginForm: FormGroup<UserFormGroup>;
   constructor(private readonly _fb: NonNullableFormBuilder) {
+    console.info(`State>> ${this.loginService.loginState()}`);
     this.loginForm = this._fb.group<UserFormGroup>({
       username: this._fb.control('', {validators: [requireNotBlank()]}),
       password: this._fb.control('', {validators: [requireNotBlank()]})
@@ -41,10 +42,10 @@ export class LoginComponent {
 
   login() {
     const user: User = this.loginForm.getRawValue();
-    this.loginService.sendLoginRequest(user).subscribe(token => {
-      this.localStorageService.setItem(LocalStorageService.JWT, token);
-      this.router.navigate(['job-posting-list'])
-    });
+    this.loginService.sendLoginRequest(user)
+      .then(
+        () => this.router.navigate(['job-posting-list']), 
+        err => this.snackbar.open('Login failed', '', { duration: 1000, verticalPosition: 'top' }));
     console.info(user);
   }
 }

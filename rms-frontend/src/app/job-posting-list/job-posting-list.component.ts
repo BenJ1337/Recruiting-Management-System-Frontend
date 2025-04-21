@@ -15,7 +15,6 @@ import { LocalStorageService } from '../service/local-storage.service';
 })
 export class JobPostingListComponent {
   private jobPostingService = inject(JobPostingServiceService);
-  private snackbar = inject(MatSnackBar);
   private localStorage = inject(LocalStorageService);
 
   columnsDisplay: string[] = ['title', 'description'];
@@ -25,7 +24,6 @@ export class JobPostingListComponent {
     this.jobPostingService.getJobPostings().subscribe(jobpostings => {
       this.dataSource.data = jobpostings;
     });
-    this.snackbar.open('Hello World', '', { duration: 1000, verticalPosition: 'top' });
   }
 
 }

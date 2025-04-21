@@ -44,7 +44,7 @@ export class JobPostingFormComponent {
   create() {
     const jobPosting: IJobPosting = { ...this.jobPostingForm.value, status: JobPostingStatus.DRAFT };
     console.log(jobPosting);
-    //this.jobPostingService.sendJobPosting(jobPosting).subscribe(data => console.log(data));
+    this.jobPostingService.sendJobPosting(jobPosting).subscribe(data => console.log(data));
   }
 
 

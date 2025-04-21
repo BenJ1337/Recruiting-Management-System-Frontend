@@ -17,6 +17,6 @@ export class JobPostingServiceService {
   }
 
   public sendJobPosting(jobPosting: IJobPosting): Observable<IJobPosting> {
-    return this.http.put<any>('/api/v1/jobpostings/3', jobPosting);
+    return this.http.post<any>('/api/v1/jobpostings', jobPosting);
   }
 }

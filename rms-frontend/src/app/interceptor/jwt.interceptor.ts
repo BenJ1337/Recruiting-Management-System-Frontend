@@ -4,9 +4,7 @@ import { LocalStorageService } from "../service/local-storage.service";
 import { inject, Injectable } from "@angular/core";
 import { AccessToken } from "../domain/auth/access-token";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   private readonly localStorage: LocalStorageService = inject(LocalStorageService);
 
